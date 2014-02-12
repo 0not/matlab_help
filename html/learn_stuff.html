@@ -1,0 +1,1575 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>learn_stuff</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2014-02-12"><meta name="DC.source" content="learn_stuff.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">Learn some MATLAB stuff</a></li><li><a href="#2">Intro to matrix math</a></li><li><a href="#3">Advanced matrix example</a></li><li><a href="#4">Fancy text formatting in plots and stuff</a></li></ul></div><h2>Learn some MATLAB stuff<a name="1"></a></h2><p>This file contains some tips and tricks in a nice little tutorial format. It covers basic matrix operations, animating plots, decorating plots and debugging techniques.</p><pre>Useful keys:
+ Ctrl+R  Comment line
+ Ctrl+T  Uncomment line
+ F5      Save and run program</pre><pre class="codeinput"><span class="keyword">function</span> learn_stuff
+    <span class="comment">% clc - clear console</span>
+    <span class="comment">% clear - resets all variables</span>
+    <span class="comment">% close all - closes all the figures</span>
+    clc; clear; close <span class="string">all</span>
+
+    <span class="comment">% Call matrix_math() function</span>
+    matrix_math();
+    waitforbuttonpress
+
+    <span class="comment">% Call matrix_advanced()</span>
+    matrix_advanced(true);
+    waitforbuttonpress
+
+    <span class="comment">% Let's look at a fancy plot</span>
+    fancy_plot();
+    waitforbuttonpress
+
+    <span class="comment">% This is a simple example of animating a plot</span>
+    simple_animated_plot();
+<span class="keyword">end</span>
+</pre><h2>Intro to matrix math<a name="2"></a></h2><pre class="codeinput"><span class="keyword">function</span> matrix_math()
+    <span class="comment">% Matlab numbers are just 1x1 matrices</span>
+    a = 1;                  <span class="comment">% 1x1</span>
+    b = [4 2];              <span class="comment">% 1x2</span>
+    c = [1 0; 0 1];         <span class="comment">% 2x2</span>
+    d = [1,0; 0,1];         <span class="comment">% equivalent to 'c'</span>
+
+    fprintf(<span class="string">'Take a look at the Size column below:\n\n'</span>);
+    whos
+
+    <span class="comment">% Print out some sizes</span>
+    <span class="comment">% Notice the three dots, to indicate that the statement continues on</span>
+    <span class="comment">% the next line.</span>
+    fprintf(<span class="string">'size(d): (%g, %g)\nlength(d): %g\nnumel(d): %g\n\n'</span>, <span class="keyword">...</span>
+        size(d), length(d), numel(d));
+
+    <span class="comment">% We don't need a-d anymore, so clear 'em!</span>
+    clear
+
+    <span class="comment">% Doesn't print anything now:</span>
+    whos
+
+    <span class="comment">% Real example:</span>
+    <span class="comment">% You need to rotate an acceleration vector by Pi/2</span>
+    acc = [1, 1];
+
+    <span class="comment">% Rotation matrix (about z axis)</span>
+    <span class="comment">%   cos(x)  -sin(x)</span>
+    <span class="comment">%   sin(x)  cos(x)</span>
+    angle = pi/2;
+    rotator = [cos(angle) -sin(angle);
+               sin(angle)  cos(angle)];
+
+    <span class="comment">% Perform rotation</span>
+    new_acc = acc * rotator;
+    <span class="comment">% The order matters!  If acc were a column vector (which, it</span>
+    <span class="comment">% technically should be), then the order of operations would a have to</span>
+    <span class="comment">% be: new_acc = rotator * acc;</span>
+
+    fprintf(<span class="string">'Old acc: (%g, %g)\nNew acc: (%g, %g)\n'</span>, acc(1,1), acc(1,2), new_acc(1,1), new_acc(1,2));
+
+    <span class="comment">% Arithmetic operators in MATLAB mean matrix-arithmetic.</span>
+    <span class="comment">% If you want to do element-wise operations, use a dot.</span>
+
+    <span class="comment">% Technically here you can just use a regular /, but its good practice</span>
+    <span class="comment">% to use ./</span>
+    normalized = new_acc ./ norm(new_acc)
+
+    clear
+
+    a = [1, 2, 3;
+         4, 5, 6;
+         7, 8, 9];
+    b = [9, 8, 7;
+         6, 5, 4;
+         3, 2, 1];
+
+    c = a*b
+    d = a.*b
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">Take a look at the Size column below:
+
+  Name      Size            Bytes  Class     Attributes
+
+  a         1x1                 8  double              
+  b         1x2                16  double              
+  c         2x2                32  double              
+  d         2x2                32  double              
+
+size(d): (2, 2)
+length(d): 2
+numel(d): 4
+
+Old acc: (1, 1)
+New acc: (1, -1)
+
+normalized =
+
+    0.7071   -0.7071
+
+
+c =
+
+    30    24    18
+    84    69    54
+   138   114    90
+
+
+d =
+
+     9    16    21
+    24    25    24
+    21    16     9
+
+</pre><img vspace="5" hspace="5" src="learn_stuff_01.png" alt=""> <h2>Advanced matrix example<a name="3"></a></h2><p>Here we use a matrix to store position data for some particles that then undergo a random walk.  This is the cream in the coffee problem.</p><pre class="codeinput"><span class="keyword">function</span> matrix_advanced(boundary_condition)
+    <span class="comment">% Number of particles (can be very large!)</span>
+    num_particles = 100;
+
+    <span class="comment">% Length of the square side that the particles start in</span>
+    L = 100;
+
+    <span class="comment">% Cup radius and cup radius squared (to avoid costly square roots</span>
+    <span class="comment">% later)</span>
+    cup_radius  = L*3;
+    cup_radius2 = cup_radius^2;
+
+    <span class="comment">% Time to run for (number of iterations, not explicit time)</span>
+    run_time = 1000;
+
+    <span class="comment">% Scale factor for random walk amount (keep it integer)</span>
+    scale = 3;
+
+    <span class="comment">% The particles are a num_particles x 2 matrix (meaning, one row for</span>
+    <span class="comment">% each particle and each particle has 2 dimensions).</span>
+    <span class="comment">% Subtract off half the side from each element to go from -L/2 to L/2</span>
+    parts = randi(L, num_particles, 2) - 0.5*L;
+
+    <span class="comment">% Plot the particles as blue dots</span>
+    plot(parts(:, 1), parts(:, 2), <span class="string">'.b'</span>);
+
+    <span class="comment">% Set the plot axis from -10*L to 10*L in both directions, to be able to see</span>
+    <span class="comment">% the particles walk out</span>
+    axis(10*L.*[-1  1 -1 1]);
+
+    <span class="keyword">for</span> n=1:run_time
+        <span class="comment">% Generate displacement matrix</span>
+        <span class="comment">% We make a random integer matrix of proper size with values 1, 2,</span>
+        <span class="comment">% and 3, then subtract 2 to get values -1, 0, 1</span>
+        dm = scale*(randi(3, num_particles, 2) - 2);
+        tmp = dm + parts;
+
+        <span class="comment">% If we want a boundary condition, apply it.</span>
+        <span class="keyword">if</span> boundary_condition
+            <span class="comment">% This is just the distance formula.  We want to see of the new</span>
+            <span class="comment">% position of the particle would put it outside the boundary.</span>
+            <span class="comment">% A negative value in dist2 (distance squared) means that the</span>
+            <span class="comment">% particle is out of bounds</span>
+            dist2 = (cup_radius2 - (tmp(:, 1).^2 + tmp(:, 2).^2));
+
+            <span class="comment">% This is a little trick.  What we do here is a boolean</span>
+            <span class="comment">% operation.  valid becomes a column vector of 0 or 1,</span>
+            <span class="comment">% depending on if the particle is out of bounds or not.  This</span>
+            <span class="comment">% is neat because it allows us to then create a two column</span>
+            <span class="comment">% vector (next line) to multiply against our displacement</span>
+            <span class="comment">% matrix.  This is much faster than a loop with many</span>
+            <span class="comment">% conditionals.</span>
+            valid = dist2 &gt; zeros(num_particles, 1);
+
+            <span class="comment">% The new particle matrix is the old one, plus the valid</span>
+            <span class="comment">% elements of the dislocation matrix</span>
+            parts = parts  + dm .* [valid valid];
+        <span class="keyword">else</span>
+            parts = tmp;
+        <span class="keyword">end</span>
+
+        <span class="comment">% This is an alternative (very slow) method for boundary</span>
+        <span class="comment">% conditions  and updating particles using common programming</span>
+        <span class="comment">% practices</span>
+<span class="comment">%         if boundary_condition</span>
+<span class="comment">%             % Loop through all of the particles</span>
+<span class="comment">%             for j=1:num_particles</span>
+<span class="comment">%                 % Make a temporary row vector</span>
+<span class="comment">%                 tmp = parts(j,:);</span>
+<span class="comment">%</span>
+<span class="comment">%                 % Get our random walk factors</span>
+<span class="comment">%                 rand_x = scale*(randi(3)-2);</span>
+<span class="comment">%                 rand_y = scale*(randi(3)-2);</span>
+<span class="comment">%</span>
+<span class="comment">%                 % Add factors to tmp</span>
+<span class="comment">%                 tmp(1, 1) = tmp(1, 1) + rand_x;</span>
+<span class="comment">%                 tmp(1, 2) = tmp(1, 2) + rand_y;</span>
+<span class="comment">%</span>
+<span class="comment">%                 % If the particle would remain inside, use this value, else</span>
+<span class="comment">%                 % don't update</span>
+<span class="comment">%                 dist = sqrt(tmp(1, 1)^2 + tmp(1, 2)^2);</span>
+<span class="comment">%                 if dist &lt; cup_radius</span>
+<span class="comment">%                     parts(j, :) = tmp(1, :);</span>
+<span class="comment">%                 end</span>
+<span class="comment">%             end</span>
+<span class="comment">%         else</span>
+<span class="comment">%             parts = tmp;</span>
+<span class="comment">%         end</span>
+
+
+        plot(parts(:, 1), parts(:, 2), <span class="string">'.b'</span>);
+        axis(10*L.*[-1  1 -1 1]);
+<span class="comment">%         title('Cream in a cup. Random equation: $\exp^{i\theta} = \cos(\theta) + i\sin(\theta)$');</span>
+
+        <span class="comment">% If we don't say hold on, then the circle below will overwrite the</span>
+        <span class="comment">% plot</span>
+        hold <span class="string">on</span>;
+
+        <span class="comment">% Draw the circle</span>
+        circle(0, 0, cup_radius);
+
+        <span class="comment">% This tells matlab to draw the plot now, instead of waiting until</span>
+        <span class="comment">% the end (this is how we do the animation).</span>
+        drawnow;
+
+        <span class="comment">% Now we must turn the hold off, so that the next iteration can</span>
+        <span class="comment">% draw on a blank figure.</span>
+        hold <span class="string">off</span>;
+    <span class="keyword">end</span>
+
+
+<span class="keyword">end</span>
+
+
+<span class="comment">% Draw a circle, for the cream in a cup problem</span>
+<span class="comment">% http://www.mathworks.com/matlabcentral/answers/3058</span>
+<span class="keyword">function</span> circle(x, y, r)
+    <span class="comment">% x and y are the coordinates of the center of the circle</span>
+    <span class="comment">% r is the radius of the circle</span>
+    <span class="comment">% 0.01 is the angle step, bigger values will draw the circle faster but</span>
+    <span class="comment">% you might notice imperfections (not very smooth)</span>
+    ang = 0:0.01:2 * pi;
+    xp = r * cos(ang);
+    yp = r * sin(ang);
+    plot(x + xp, y + yp);
+<span class="keyword">end</span>
+</pre><img vspace="5" hspace="5" src="learn_stuff_02.png" alt=""> <h2>Fancy text formatting in plots and stuff<a name="4"></a></h2><p>Matlab recognizes a subset of TeX.  If this comment were published, the following would be formatted all fancy-like:</p><p><img src="learn_stuff_eq05913.png" alt="$$e^{\pi i} + 1 = 0$$"></p><p>Pretty neat, huh?  There is more to it than that, though.  Let's look at making a fancy plot.</p><pre class="codeinput"><span class="keyword">function</span> fancy_plot()
+    <span class="comment">% Construct our data</span>
+    x = -pi:0.1:pi;
+    y1 = sin(x);
+
+    <span class="comment">% Add to subplot</span>
+    subplot(2, 2, 1);
+
+    <span class="comment">% This plot uses diamonds that are blue, henc 'db' (diamond blue)</span>
+    <span class="comment">% For a list of all the shortcuts, search LineSpec in the docs.</span>
+    plot(x, y1, <span class="string">'db'</span>);
+    grid <span class="string">on</span>;                        <span class="comment">% Turn the grid on</span>
+    xlabel(<span class="string">'X'</span>)                     <span class="comment">% Add labels</span>
+    ylabel(<span class="string">'Y'</span>)
+
+    <span class="comment">% This title uses TeX symbols</span>
+    title(<span class="string">'\sin(x), -\pi \le x \le \pi'</span>)
+
+    <span class="comment">% Next plot (uses same x)</span>
+    y2 = cos(x);
+    subplot(2, 2, 2), plot(x, y2, <span class="string">'sr'</span>);
+    grid <span class="string">on</span>;
+    xlabel(<span class="string">'X'</span>)
+    ylabel(<span class="string">'Y'</span>)
+    title(<span class="string">'\cos(x), -\pi \le x \le \pi'</span>)
+
+    <span class="comment">% Final plot</span>
+    subplot(2, 2, [3 4]), plot(x, y1, <span class="string">'b'</span>, x, y2, <span class="string">'r'</span>);
+    grid <span class="string">on</span>;
+    xlabel(<span class="string">'X'</span>)
+    ylabel(<span class="string">'Y'</span>)
+    title(<span class="string">'\sin(x) and \cos(x), -\pi \le x \le \pi'</span>, <span class="string">'FontSize'</span>, 20, <span class="string">'FontWeight'</span>, <span class="string">'bold'</span>)
+
+    <span class="comment">% Add some text</span>
+    text(pi/4,sin(pi/4), <span class="string">'\leftarrowsin(x) = cos(x) = 0.707'</span>, <span class="string">'FontSize'</span>, 16)
+    text(-3*pi/4,sin(-3*pi/4), <span class="string">'\leftarrowsin(x) = cos(x) = -0.707'</span>, <span class="string">'FontSize'</span>, 16)
+
+<span class="keyword">end</span>
+
+<span class="comment">% Simple animated plot</span>
+<span class="keyword">function</span> simple_animated_plot()
+    close <span class="string">all</span>
+    run_time = 10;
+    dt = 0.01;
+
+    <span class="keyword">for</span> t = 1:dt:run_time
+        <span class="comment">% Construct our data</span>
+        x = -pi:0.1:pi;
+        y1 = sin(x-t);
+        y2 = cos(x-t);
+
+        plot(x, y1, <span class="string">'b'</span>, x, y2, <span class="string">'r'</span>);
+        xlabel(<span class="string">'X'</span>)
+        ylabel(<span class="string">'Y'</span>)
+        title(<span class="string">'Animated \sin \cos plot'</span>, <span class="string">'FontSize'</span>, 20, <span class="string">'FontWeight'</span>, <span class="string">'bold'</span>)
+
+        drawnow
+    <span class="keyword">end</span>
+
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">Warning: Unable to interpret TeX string "\sin(x) and \cos(x), -\pi \le x \le
+\pi" 
+Warning: Unable to interpret TeX string "\sin(x), -\pi \le x \le \pi" 
+Warning: Unable to interpret TeX string "\cos(x), -\pi \le x \le \pi" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+Warning: Unable to interpret TeX string "Animated \sin \cos plot" 
+</pre><img vspace="5" hspace="5" src="learn_stuff_03.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Learn some MATLAB stuff
+% This file contains some tips and tricks in a nice little tutorial format.
+% It covers basic matrix operations, animating plots, decorating plots and
+% debugging techniques.
+%
+%  Useful keys:
+%   Ctrl+R  Comment line
+%   Ctrl+T  Uncomment line
+%   F5      Save and run program
+
+function learn_stuff
+    % clc - clear console
+    % clear - resets all variables
+    % close all - closes all the figures
+    clc; clear; close all
+    
+    % Call matrix_math() function
+    matrix_math();
+    waitforbuttonpress
+    
+    % Call matrix_advanced()
+    matrix_advanced(true);
+    waitforbuttonpress
+    
+    % Let's look at a fancy plot
+    fancy_plot();
+    waitforbuttonpress
+    
+    % This is a simple example of animating a plot
+    simple_animated_plot();
+end
+
+%% Intro to matrix math
+function matrix_math()
+    % Matlab numbers are just 1x1 matrices
+    a = 1;                  % 1x1
+    b = [4 2];              % 1x2
+    c = [1 0; 0 1];         % 2x2
+    d = [1,0; 0,1];         % equivalent to 'c'
+    
+    fprintf('Take a look at the Size column below:\n\n');
+    whos
+    
+    % Print out some sizes
+    % Notice the three dots, to indicate that the statement continues on
+    % the next line.
+    fprintf('size(d): (%g, %g)\nlength(d): %g\nnumel(d): %g\n\n', ...
+        size(d), length(d), numel(d));
+    
+    % We don't need a-d anymore, so clear 'em!
+    clear 
+    
+    % Doesn't print anything now:
+    whos
+    
+    % Real example:
+    % You need to rotate an acceleration vector by Pi/2
+    acc = [1, 1];
+    
+    % Rotation matrix (about z axis)
+    %   cos(x)  -sin(x)
+    %   sin(x)  cos(x)
+    angle = pi/2;
+    rotator = [cos(angle) -sin(angle);
+               sin(angle)  cos(angle)];
+    
+    % Perform rotation
+    new_acc = acc * rotator;
+    % The order matters!  If acc were a column vector (which, it
+    % technically should be), then the order of operations would a have to
+    % be: new_acc = rotator * acc;
+    
+    fprintf('Old acc: (%g, %g)\nNew acc: (%g, %g)\n', acc(1,1), acc(1,2), new_acc(1,1), new_acc(1,2));
+    
+    % Arithmetic operators in MATLAB mean matrix-arithmetic.
+    % If you want to do element-wise operations, use a dot.
+    
+    % Technically here you can just use a regular /, but its good practice
+    % to use ./
+    normalized = new_acc ./ norm(new_acc)
+    
+    clear
+    
+    a = [1, 2, 3;
+         4, 5, 6;
+         7, 8, 9];
+    b = [9, 8, 7;
+         6, 5, 4;
+         3, 2, 1];
+     
+    c = a*b
+    d = a.*b
+end
+
+%% Advanced matrix example
+% Here we use a matrix to store position data for some particles that then
+% undergo a random walk.  This is the cream in the coffee problem.
+function matrix_advanced(boundary_condition)
+    % Number of particles (can be very large!)
+    num_particles = 100;
+    
+    % Length of the square side that the particles start in
+    L = 100;
+    
+    % Cup radius and cup radius squared (to avoid costly square roots
+    % later)
+    cup_radius  = L*3;
+    cup_radius2 = cup_radius^2;
+    
+    % Time to run for (number of iterations, not explicit time)
+    run_time = 1000;
+    
+    % Scale factor for random walk amount (keep it integer)
+    scale = 3;
+    
+    % The particles are a num_particles x 2 matrix (meaning, one row for
+    % each particle and each particle has 2 dimensions).
+    % Subtract off half the side from each element to go from -L/2 to L/2
+    parts = randi(L, num_particles, 2) - 0.5*L;
+    
+    % Plot the particles as blue dots
+    plot(parts(:, 1), parts(:, 2), '.b');
+    
+    % Set the plot axis from -10*L to 10*L in both directions, to be able to see
+    % the particles walk out
+    axis(10*L.*[-1  1 -1 1]);
+    
+    for n=1:run_time
+        % Generate displacement matrix
+        % We make a random integer matrix of proper size with values 1, 2, 
+        % and 3, then subtract 2 to get values -1, 0, 1
+        dm = scale*(randi(3, num_particles, 2) - 2);
+        tmp = dm + parts;
+        
+        % If we want a boundary condition, apply it.
+        if boundary_condition
+            % This is just the distance formula.  We want to see of the new
+            % position of the particle would put it outside the boundary.
+            % A negative value in dist2 (distance squared) means that the 
+            % particle is out of bounds 
+            dist2 = (cup_radius2 - (tmp(:, 1).^2 + tmp(:, 2).^2));
+            
+            % This is a little trick.  What we do here is a boolean
+            % operation.  valid becomes a column vector of 0 or 1,
+            % depending on if the particle is out of bounds or not.  This
+            % is neat because it allows us to then create a two column
+            % vector (next line) to multiply against our displacement
+            % matrix.  This is much faster than a loop with many
+            % conditionals.
+            valid = dist2 > zeros(num_particles, 1);
+            
+            % The new particle matrix is the old one, plus the valid
+            % elements of the dislocation matrix
+            parts = parts  + dm .* [valid valid];
+        else
+            parts = tmp; 
+        end
+        
+        % This is an alternative (very slow) method for boundary
+        % conditions  and updating particles using common programming 
+        % practices
+%         if boundary_condition
+%             % Loop through all of the particles
+%             for j=1:num_particles
+%                 % Make a temporary row vector
+%                 tmp = parts(j,:);
+%                 
+%                 % Get our random walk factors
+%                 rand_x = scale*(randi(3)-2);
+%                 rand_y = scale*(randi(3)-2);
+%                 
+%                 % Add factors to tmp
+%                 tmp(1, 1) = tmp(1, 1) + rand_x;
+%                 tmp(1, 2) = tmp(1, 2) + rand_y;
+%                 
+%                 % If the particle would remain inside, use this value, else
+%                 % don't update
+%                 dist = sqrt(tmp(1, 1)^2 + tmp(1, 2)^2);
+%                 if dist < cup_radius
+%                     parts(j, :) = tmp(1, :);
+%                 end
+%             end
+%         else
+%             parts = tmp;
+%         end
+        
+        
+        plot(parts(:, 1), parts(:, 2), '.b');
+        axis(10*L.*[-1  1 -1 1]);
+%         title('Cream in a cup. Random equation: $\exp^{i\theta} = \cos(\theta) + i\sin(\theta)$');
+        
+        % If we don't say hold on, then the circle below will overwrite the
+        % plot
+        hold on;
+        
+        % Draw the circle
+        circle(0, 0, cup_radius);
+        
+        % This tells matlab to draw the plot now, instead of waiting until
+        % the end (this is how we do the animation).
+        drawnow;
+        
+        % Now we must turn the hold off, so that the next iteration can
+        % draw on a blank figure.
+        hold off;
+    end
+    
+
+end
+
+
+% Draw a circle, for the cream in a cup problem
+% http://www.mathworks.com/matlabcentral/answers/3058
+function circle(x, y, r)
+    % x and y are the coordinates of the center of the circle
+    % r is the radius of the circle
+    % 0.01 is the angle step, bigger values will draw the circle faster but
+    % you might notice imperfections (not very smooth)
+    ang = 0:0.01:2 * pi; 
+    xp = r * cos(ang);
+    yp = r * sin(ang);
+    plot(x + xp, y + yp);
+end
+
+
+%% Fancy text formatting in plots and stuff
+% Matlab recognizes a subset of TeX.  If this comment were published, the
+% following would be formatted all fancy-like:
+%%
+% 
+% $$e^{\pi i} + 1 = 0$$
+% 
+% Pretty neat, huh?  There is more to it than that, though.  Let's look at
+% making a fancy plot.
+function fancy_plot()
+    % Construct our data
+    x = -pi:0.1:pi;
+    y1 = sin(x);
+    
+    % Add to subplot
+    subplot(2, 2, 1); 
+    
+    % This plot uses diamonds that are blue, henc 'db' (diamond blue)
+    % For a list of all the shortcuts, search LineSpec in the docs.
+    plot(x, y1, 'db'); 
+    grid on;                        % Turn the grid on
+    xlabel('X')                     % Add labels
+    ylabel('Y')
+    
+    % This title uses TeX symbols
+    title('\sin(x), -\pi \le x \le \pi')
+    
+    % Next plot (uses same x)
+    y2 = cos(x);
+    subplot(2, 2, 2), plot(x, y2, 'sr'); 
+    grid on;                        
+    xlabel('X')                     
+    ylabel('Y')
+    title('\cos(x), -\pi \le x \le \pi')
+    
+    % Final plot
+    subplot(2, 2, [3 4]), plot(x, y1, 'b', x, y2, 'r'); 
+    grid on;                        
+    xlabel('X')                     
+    ylabel('Y')
+    title('\sin(x) and \cos(x), -\pi \le x \le \pi', 'FontSize', 20, 'FontWeight', 'bold')
+    
+    % Add some text
+    text(pi/4,sin(pi/4), '\leftarrowsin(x) = cos(x) = 0.707', 'FontSize', 16)
+    text(-3*pi/4,sin(-3*pi/4), '\leftarrowsin(x) = cos(x) = -0.707', 'FontSize', 16)
+
+end
+
+% Simple animated plot
+function simple_animated_plot()
+    close all
+    run_time = 10;
+    dt = 0.01;
+    
+    for t = 1:dt:run_time
+        % Construct our data
+        x = -pi:0.1:pi;
+        y1 = sin(x-t);
+        y2 = cos(x-t);
+
+        plot(x, y1, 'b', x, y2, 'r');                     
+        xlabel('X')                     
+        ylabel('Y')
+        title('Animated \sin \cos plot', 'FontSize', 20, 'FontWeight', 'bold')
+        
+        drawnow
+    end
+
+end
+
+##### SOURCE END #####
+--></body></html>

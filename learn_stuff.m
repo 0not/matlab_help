@@ -1,9 +1,12 @@
 %% Learn some MATLAB stuff
 % This file contains some tips and tricks in a nice little tutorial format.
-% Useful keys:
-%  Ctrl+R  Comment line
-%  Ctrl+T  Uncomment line
-%  F5      Save and run program
+% It covers basic matrix operations, animating plots, decorating plots and
+% debugging techniques.
+%
+%  Useful keys:
+%   Ctrl+R  Comment line
+%   Ctrl+T  Uncomment line
+%   F5      Save and run program
 
 function learn_stuff
     % clc - clear console
@@ -13,9 +16,18 @@ function learn_stuff
     
     % Call matrix_math() function
     matrix_math();
+    waitforbuttonpress
     
     % Call matrix_advanced()
     matrix_advanced(true);
+    waitforbuttonpress
+    
+    % Let's look at a fancy plot
+    fancy_plot();
+    waitforbuttonpress
+    
+    % This is a simple example of animating a plot
+    simple_animated_plot();
 end
 
 %% Intro to matrix math
@@ -29,6 +41,12 @@ function matrix_math()
     fprintf('Take a look at the Size column below:\n\n');
     whos
     
+    % Print out some sizes
+    % Notice the three dots, to indicate that the statement continues on
+    % the next line.
+    fprintf('size(d): (%g, %g)\nlength(d): %g\nnumel(d): %g\n\n', ...
+        size(d), length(d), numel(d));
+    
     % We don't need a-d anymore, so clear 'em!
     clear 
     
@@ -39,7 +57,7 @@ function matrix_math()
     % You need to rotate an acceleration vector by Pi/2
     acc = [1, 1];
     
-    % Rotation matrix
+    % Rotation matrix (about z axis)
     %   cos(x)  -sin(x)
     %   sin(x)  cos(x)
     angle = pi/2;
@@ -48,6 +66,9 @@ function matrix_math()
     
     % Perform rotation
     new_acc = acc * rotator;
+    % The order matters!  If acc were a column vector (which, it
+    % technically should be), then the order of operations would a have to
+    % be: new_acc = rotator * acc;
     
     fprintf('Old acc: (%g, %g)\nNew acc: (%g, %g)\n', acc(1,1), acc(1,2), new_acc(1,1), new_acc(1,2));
     
@@ -76,7 +97,7 @@ end
 % undergo a random walk.  This is the cream in the coffee problem.
 function matrix_advanced(boundary_condition)
     % Number of particles (can be very large!)
-    num_particles = 10000;
+    num_particles = 100;
     
     % Length of the square side that the particles start in
     L = 100;
@@ -87,7 +108,7 @@ function matrix_advanced(boundary_condition)
     cup_radius2 = cup_radius^2;
     
     % Time to run for (number of iterations, not explicit time)
-    run_time = 20000;
+    run_time = 1000;
     
     % Scale factor for random walk amount (keep it integer)
     scale = 3;
@@ -202,4 +223,72 @@ function circle(x, y, r)
 end
 
 
-% Fancy text formatting in plots
+%% Fancy text formatting in plots and stuff
+% Matlab recognizes a subset of TeX.  If this comment were published, the
+% following would be formatted all fancy-like:
+%%
+% 
+% $$e^{\pi i} + 1 = 0$$
+% 
+% Pretty neat, huh?  There is more to it than that, though.  Let's look at
+% making a fancy plot.
+function fancy_plot()
+    % Construct our data
+    x = -pi:0.1:pi;
+    y1 = sin(x);
+    
+    % Add to subplot
+    subplot(2, 2, 1); 
+    
+    % This plot uses diamonds that are blue, henc 'db' (diamond blue)
+    % For a list of all the shortcuts, search LineSpec in the docs.
+    plot(x, y1, 'db'); 
+    grid on;                        % Turn the grid on
+    xlabel('X')                     % Add labels
+    ylabel('Y')
+    
+    % This title uses TeX symbols
+    title('\sin(x), -\pi \le x \le \pi')
+    
+    % Next plot (uses same x)
+    y2 = cos(x);
+    subplot(2, 2, 2), plot(x, y2, 'sr'); 
+    grid on;                        
+    xlabel('X')                     
+    ylabel('Y')
+    title('\cos(x), -\pi \le x \le \pi')
+    
+    % Final plot
+    subplot(2, 2, [3 4]), plot(x, y1, 'b', x, y2, 'r'); 
+    grid on;                        
+    xlabel('X')                     
+    ylabel('Y')
+    title('\sin(x) and \cos(x), -\pi \le x \le \pi', 'FontSize', 20, 'FontWeight', 'bold')
+    
+    % Add some text
+    text(pi/4,sin(pi/4), '\leftarrowsin(x) = cos(x) = 0.707', 'FontSize', 16)
+    text(-3*pi/4,sin(-3*pi/4), '\leftarrowsin(x) = cos(x) = -0.707', 'FontSize', 16)
+
+end
+
+% Simple animated plot
+function simple_animated_plot()
+    close all
+    run_time = 10;
+    dt = 0.01;
+    
+    for t = 1:dt:run_time
+        % Construct our data
+        x = -pi:0.1:pi;
+        y1 = sin(x-t);
+        y2 = cos(x-t);
+
+        plot(x, y1, 'b', x, y2, 'r');                     
+        xlabel('X')                     
+        ylabel('Y')
+        title('Animated \sin \cos plot', 'FontSize', 20, 'FontWeight', 'bold')
+        
+        drawnow
+    end
+
+end
